@@ -1,6 +1,5 @@
 class Player
 
-
 	def initialize
 		@health = 20
 	end
@@ -23,8 +22,11 @@ class Player
 	def advance_and_attack(warrior)
 		if warrior.feel.enemy?
 			warrior.attack!
-		else
+		elsif warrior.feel.captive?
+			warrior.rescue!
+		elsif warrior.feel.empty?
 			warrior.walk!
 		end
 	end
+
 end
