@@ -5,11 +5,13 @@ class Player
 	end
 
 	def play_turn(warrior)
-		if @health > warrior.health
-			#im being attacked
-			advance_and_attack(warrior)
-		else
-			#im not being attacked
+		if @health > warrior.health #im being attacked
+			if warrior.health > 10 #i have enough health to continue
+				advance_and_attack(warrior)
+			else #i need to retreat
+				warrior.walk!(:backward)
+			end
+		else #im not being attacked
 			if warrior.health < 20
 				warrior.rest!
 			else
