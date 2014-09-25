@@ -24,7 +24,7 @@
 </node>
 </node>
 <node CREATED="1411685436651" ID="ID_1435110827" MODIFIED="1411685443950" TEXT="space in front is wall">
-<node CREATED="1411685443951" ID="ID_548935232" MODIFIED="1411686789081" TEXT="pivot!(:backward)  ||  @far_wall_found = true"/>
+<node CREATED="1411685443951" ID="ID_548935232" MODIFIED="1411687260982" TEXT="pivot!(:backward)  &amp;&amp; @far_wall_found = true"/>
 </node>
 </node>
 <node CREATED="1411597173801" ID="ID_332531696" MODIFIED="1411597175297" TEXT="no">
