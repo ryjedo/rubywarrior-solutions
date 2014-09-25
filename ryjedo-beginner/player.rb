@@ -54,16 +54,22 @@ class Player
 	end
 
 	def detect_space_type(space)
+		
 		if space.empty?
 			return :empty
+		
 		elsif space.enemy?
 			return :enemy
+		
 		elsif space.captive?
 			return :captive
+		
 		elsif space.wall?
 			return :wall
+		
 		elsif space.stairs?
 			return :stairs
+		
 		else
 			return :unkown_space
 		end
