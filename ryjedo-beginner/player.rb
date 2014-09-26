@@ -44,22 +44,6 @@ class Player
 		end
 	end
 
-=begin
-	def advance_backward(warrior)
-		direction = :backward
-		case detect_space_type(warrior.feel(direction))
-		when :empty 
-			warrior.walk!(direction)
-		when :enemy
-			warrior.attack!(direction)
-		when :captive
-			warrior.rescue!(direction)
-		when :wall
-			@found_level_start = true
-		end
-	end
-=end
-
 	def detect_space_type(space)
 		
 		if space.empty?
