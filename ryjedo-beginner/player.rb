@@ -59,6 +59,7 @@ class Player
 		
 			case viewable_spaces.first
 			when :captive
+				puts("rescue")
 				warrior.rescue!(:forward)
 				@area_assumed_safe = false
 			when :wall
@@ -125,8 +126,8 @@ class Player
 
 		viewable_spaces.each { |viewable_space|
 			
-			if viewable_space.stairs?
-				viewable_symbols.push(:stairs)
+			if viewable_space.wall?
+				viewable_symbols.push(:wall)
 			
 			elsif viewable_space.enemy?
 				viewable_symbols.push(:enemy)
@@ -134,8 +135,8 @@ class Player
 			elsif viewable_space.captive?
 				viewable_symbols.push(:captive)
 			
-			elsif viewable_space.wall?
-				viewable_symbols.push(:wall)
+			elsif viewable_space.stairs?
+				viewable_symbols.push(:stairs)
 			
 			elsif viewable_space.empty?
 				viewable_symbols.push(:empty)
