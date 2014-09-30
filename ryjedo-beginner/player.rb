@@ -4,13 +4,20 @@ class Player
 		
 		@found_far_wall = false
 		@area_assumed_safe = false
-	
+		@starting_orientation_reversed = false
+
 	end
 
 
 	def play_turn(warrior)
 
-		if @area_assumed_safe == true
+		#quite possibly the ugliest, and least general-case solution possible. 
+		#done this way because its impossible to tell ranged enemy's from melee enemys in code.
+		#there may be a more elegant solution, but not likely one elegant enough to warrant the time spent.
+		if @starting_orientation_reversed == false
+			warrior.pivot!(:backward)
+			@starting_orientation_reversed = true
+		elsif @area_assumed_safe == true
 			advance_forward(warrior)
 		else
 			detect_and_attack_enemies(warrior)
@@ -45,24 +52,29 @@ class Player
 
 	def advance_forward(warrior)
 	
-		viewable_spaces = identify_viewable_spaces(warrior.look(:forward))
+		if warrior.health < 20
+			warrior.rest!
+		else
+			viewable_spaces = identify_viewable_spaces(warrior.look(:forward))
 		
-		case viewable_spaces.first
-		when :captive
-			warrior.rescue!(:forward)
-			@area_assumed_safe = false
-		when :wall
-			warrior.pivot!(:backward)
-			@found_far_wall = true
-		when :stairs
-			if @found_far_wall == true
-				warrior.walk!(:forward)
-			else
+			case viewable_spaces.first
+			when :captive
+				warrior.rescue!(:forward)
+				@area_assumed_safe = false
+			when :wall
 				warrior.pivot!(:backward)
+				@found_far_wall = true
+			when :stairs
+				if @found_far_wall == true
+					warrior.walk!(:forward)
+				else
+					warrior.pivot!(:backward)
+				end
+			when :empty
+				warrior.walk!(:forward)
+				@area_assumed_safe = false
 			end
-		when :empty
-			warrior.walk!(:forward)
-			@area_assumed_safe = false
+
 		end
 	
 	end
