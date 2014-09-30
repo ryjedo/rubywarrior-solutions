@@ -30,6 +30,7 @@ class Player
 			if direction_is_safe?(view_backward)
 				#assume area is safe
 				@area_assumed_safe = true
+				advance_forward(warrior)
 			else
 				#attack that direction
 				attack_enemy(view_backward, :backward, warrior)
